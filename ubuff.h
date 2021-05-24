@@ -16,7 +16,7 @@ class ubuff {
      public: 
            ubuff( ); 
            ~ubuff();
-           void ubuff::allocate( unsigned short n); 
+           void allocate( unsigned short n); 
            void GetCurrent( unsigned char **pCurrent, unsigned short *iLeft) const {
              if ( pbuffer == NULL ) {
                    *pCurrent = NULL; 
@@ -30,8 +30,9 @@ class ubuff {
                *pCurrent = pbuffer +ip; 
                *iLeft = maxsize - ip; 
              }
-           }
-           void append( unsigned char *ptr, unsigned short ilen ) { 
+           }; 
+ 
+           void append( const unsigned char *ptr, unsigned short ilen ) { 
              if ( pbuffer ) {
                 if ( (ip + ilen) < maxsize ) {
                         memcpy(pbuffer+ ip, ptr, ilen); 
@@ -44,6 +45,17 @@ class ubuff {
                 }
              }
            }; 
+      
+           void append( const ubuff &ub ) { 
+               append( ub.pbuffer, ub.ip ); 
+           }; 
+
+           int cmp( const unsigned char *ptr, unsigned short n ) { 
+               if ( n > ip ) 
+                   return memcmp(pbuffer, ptr, ip); 
+               else 
+                   return memcmp(pbuffer, ptr, n ); 
+           };  
            
 }; 
 
