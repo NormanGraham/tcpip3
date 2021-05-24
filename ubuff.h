@@ -14,6 +14,7 @@ class ubuff {
      public: 
            ubuff( ); 
            ~ubuff();
+           void ubuff::allocate( unsigned short n); 
            void GetCurrent( unsigned char **pCurrent, unsigned short *iLeft) {
              if ( pbuffer == NULL ) {
                    *pCurrent = NULL; 
