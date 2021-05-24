@@ -2,12 +2,14 @@
 #ifndef ubuff_defined_
 #define ubuff_defined_
 // there is a class std::string.   
-// which just will not work, for us.   
-// we want an insert point, lengths of short max, and write things in, as bytes.   
+// which just will not work, for us, because the code would be unreadable if we used it.   
+// instead, just write the dumb "string" class, for our unsigned chars. 
+
 #include <string.h> 
 
-class ubuff { 
+class ubuff {
      unsigned short maxsize = 0; 
+     public: 
      unsigned short ip = 0; 
      unsigned char *pbuffer = NULL;
      long     memOverrun = 0; 
@@ -15,7 +17,7 @@ class ubuff {
            ubuff( ); 
            ~ubuff();
            void ubuff::allocate( unsigned short n); 
-           void GetCurrent( unsigned char **pCurrent, unsigned short *iLeft) {
+           void GetCurrent( unsigned char **pCurrent, unsigned short *iLeft) const {
              if ( pbuffer == NULL ) {
                    *pCurrent = NULL; 
                    *iLeft = 0; 
